@@ -131,7 +131,7 @@ public:
         {
             sumi += prices[i] - prices[i-1];
             sumi = max(sumi, 0);    // 这里的意思是，如果累加和小于0，那意味着前n个没有可赚的。仔细观察数列会发现，除非最小的数被取代了，否者前面的累加一直都有意义。
-            maxSum = max(maxSum,max);   // 全局最大值
+            maxSum = max(maxSum,sumi);   // 全局最大值
         }
     return maxSum;
     }
