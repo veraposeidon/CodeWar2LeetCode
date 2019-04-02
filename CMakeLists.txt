@@ -34,8 +34,10 @@ add_executable(remove-element 27.remove-element.cpp)
 add_executable(search-insert-position 35.search-insert-position.cpp)
 
 
+# 三数之和
+add_executable(3-sum 15.3-sum.cpp)
+
 # 第66题：plus-one
 add_executable(plus-one 66.plus-one.cpp)
-
 
 add_executable(8 8.string-to-integer-atoi.cpp)
