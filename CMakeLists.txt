@@ -40,4 +40,6 @@ add_executable(3-sum 15.3-sum.cpp)
 # 第66题：plus-one
 add_executable(plus-one 66.plus-one.cpp)
 
-add_executable(8 8.string-to-integer-atoi.cpp)
+add_executable(string-to-integer-atoi 8.string-to-integer-atoi.cpp)
+
+add_executable(longest-palindromic-substring 5.longest-palindromic-substring.cpp)
