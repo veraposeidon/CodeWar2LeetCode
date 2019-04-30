@@ -13,22 +13,22 @@
  *
  * Given a string s, find the longest palindromic substring in s. You may
  * assume that the maximum length of s is 1000.
- * 
+ *
  * Example 1:
- * 
- * 
+ *
+ *
  * Input: "babad"
  * Output: "bab"
  * Note: "aba" is also a valid answer.
- * 
- * 
+ *
+ *
  * Example 2:
- * 
- * 
+ *
+ *
  * Input: "cbbd"
  * Output: "bb"
- * 
- * 
+ *
+ *
  */
 // 解法零：最长公共子串不可以。奇数可以偶数不可以。
 // 解法一：暴力解法 双指针找子串，再通过遍历判断是否为回文串，并记录最长的。这样的时间复杂度为O(n^3),空间复杂度为O(1)。
