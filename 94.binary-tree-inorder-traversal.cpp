@@ -31,13 +31,13 @@ public:
     }
 
     void recursive(TreeNode* root,vector<int>&result){
-        if(root == NULL){
-            return ;
+        if(root->left != NULL){
+            recursive(root->left, result);
         }
-
-        recursive(root->left, result);
         result.push_back(root->val);
-        recursive(root->right, result);
+        if(root->right != NULL){
+            recursive(root->right, result);
+        }
     }
 };
 
@@ -57,20 +57,16 @@ public:
 
         while (node!=NULL || !stacks.empty())
         {
-            // 针对当前节点，有左节点就压左节点
-            while(node!=NULL){
-                stacks.push(node);
-                node = node->left;
-            }
-            
-            // 直到没有左节点，弹出，打印当前节点
-            if (!stacks.empty())
-            {
-                node = stacks.top();    // 打印当前节点
-                result.push_back(node->val);
-                stacks.pop();
-                node = node->right;
-            }
+           while(node!=NULL){
+            stacks.push(node);
+            node = node->left;
+           }
+
+           node =stacks.top();
+            result.push_back(node->val);
+            stacks.pop();
+            node =node->right;
+
         }
 
         return result;

@@ -1,7 +1,7 @@
 /*
- * @lc app=leetcode id=116 lang=cpp
+ * @lc app=leetcode id=117 lang=cpp
  *
- * [116] Populating Next Right Pointers in Each Node
+ * [117] Populating Next Right Pointers in Each Node II
  */
 /*
 // Definition for a Node.
@@ -24,12 +24,12 @@ public:
 */
 class Solution {
 public:
-    // 递归法
-    // 统统化简成小树
     Node* connect(Node* root) {
         if(root == NULL){
             return NULL;
         }
+        
+        Node* dummy = root;
         
         Node* left = connect(root->left);   // 对左子树进行操作
         Node* right = connect(root->right); // 对右子树进行操作
@@ -43,6 +43,7 @@ public:
         }
         
         
-        return root;
+        return dummy;
     }
 };
+
