@@ -1,25 +1,7 @@
 /*
- * @lc app=leetcode id=21 lang=cpp
+ * @lc app=leetcode id=23 lang=cpp
  *
- * [21] Merge Two Sorted Lists
- *
- * https://leetcode.com/problems/merge-two-sorted-lists/description/
- *
- * algorithms
- * Easy (45.84%)
- * Total Accepted:    520.9K
- * Total Submissions: 1.1M
- * Testcase Example:  '[1,2,4]\n[1,3,4]'
- *
- * Merge two sorted linked lists and return it as a new list. The new list
- * should be made by splicing together the nodes of the first two lists.
- * 
- * Example:
- * 
- * Input: 1->2->4, 1->3->4
- * Output: 1->1->2->3->4->4
- * 
- * 
+ * [23] Merge k Sorted Lists
  */
 /**
  * Definition for singly-linked list.
@@ -29,10 +11,25 @@
  *     ListNode(int x) : val(x), next(NULL) {}
  * };
  */
-
-// 解法粗暴：两个指针
 class Solution {
 public:
+    // 归并的思路
+    ListNode* mergeKLists(vector<ListNode*>& lists) {
+        if(lists.empty()) return NULL;
+         
+        return merge(lists, 0, lists.size()-1);
+    }
+    
+    ListNode* merge(vector<ListNode*>& lists, int left, int right){
+        if(left==right) return lists[left];
+        
+        int mid = left + (right-left)/2;
+        ListNode* lft = merge(lists, left, mid);
+        ListNode* rht = merge(lists, mid+1, right);
+        
+        return mergeTwoLists(lft, rht);
+    }
+    
     ListNode* mergeTwoLists(ListNode* l1, ListNode* l2) {
         if (l1 == NULL && l2 ==NULL) {
             return NULL;
