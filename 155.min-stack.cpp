@@ -69,10 +69,9 @@ public:
             {
                  mins.push(min);  
             }
-            
         }
     }
-    
+
     void pop() {
         nums.pop();
         mins.pop();

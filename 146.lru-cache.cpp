@@ -29,7 +29,7 @@
  * 
  * Example:
  * 
- * LRUCache cache = new LRUCache( 2 /* capacity */ );
+ * LRUCache cache = new LRUCache( 2  capacity );
  * 
  * cache.put(1, 1);
  * cache.put(2, 2);
@@ -43,19 +43,106 @@
  * 
  * 
  */
+
 class LRUCache {
 public:
+    struct dLink{
+        int val;
+        int key;
+        dLink *next, *prev;
+        dLink(int x, int y) : val(x),key(y),next(NULL), prev(NULL) {}
+    };
+    
+    // 双向链表 + 哈希表来实现
     LRUCache(int capacity) {
-        
+        cpcty = capacity;
     }
     
     int get(int key) {
+        // 查询有无
+        if(map.count(key)==0) return -1;
         
+        // 更新该节点到head
+        dLink* temp = map[key];
+        // head节点不动
+        if(temp != head){
+            // 其他节点
+            temp->prev->next = temp->next;
+            // tail节点要更新tail
+            if(temp == tail)
+            {
+                tail = temp->prev;
+                tail->next = NULL;
+            }else{
+                temp->next->prev = temp->prev;
+                temp->prev->next = temp->next;
+            }
+            
+            temp->next = head;
+            head->prev = temp;
+            head = temp;
+        }
+        
+        return head->val;
     }
     
     void put(int key, int value) {
-        
+        if(map.count(key)!=0){
+            // 有该节点,直接交换
+            // 改该节点值
+            dLink *temp = map[key];
+            temp->val = value;
+            
+            if(temp != head){
+             
+                // tail节点要更新tail
+                if(temp == tail)
+                {
+                    tail = temp->prev;
+                    tail->next = NULL;
+                }else{
+                    temp->next->prev = temp->prev;
+                    temp->prev->next = temp->next;
+                }
+
+                temp->next = head;
+                head->prev = temp;
+                head = temp;
+            }
+            
+        }else{
+            // 无该节点
+            dLink *newnode = new dLink(value, key);
+            if(map.empty()){
+                // 第一个节点
+                head = newnode;
+                tail = newnode;
+            }else{
+                newnode->next = head;  
+                head->prev = newnode;
+                head = newnode;
+            }
+            
+            map[key] = newnode;
+            
+            // 判断是否超了
+            if(map.size() > cpcty){
+                dLink *temp = tail;
+                tail = tail->prev;
+                tail->next = NULL;
+                
+                map.erase(temp->key);
+                delete temp;
+            }
+            
+            
+        }
     }
+private:
+    int cpcty;
+    dLink *head, *tail;
+    // key -> node
+    unordered_map <int, dLink*> map;
 };
 
 /**
@@ -64,4 +151,6 @@ public:
  * int param_1 = obj->get(key);
  * obj->put(key,value);
  */
+
+
 
