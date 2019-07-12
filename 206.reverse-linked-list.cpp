@@ -60,5 +60,16 @@ public:
         
         return newHead;
     }
+
+    // 递归解法
+    ListNode* reverseList(ListNode* head) {
+        if(head==NULL || head->next==NULL) return head;
+        
+        ListNode* prev = reverseList(head->next);
+        head->next->next = head;
+        head->next = NULL;
+        
+        return prev;
+    }
 };
 
