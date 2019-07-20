@@ -64,7 +64,7 @@
 // 不同压入，相同弹出
 class Solution {
 public:
-
+    // 用于配对
     char pair(char c)
     {
         if (c==')') {
@@ -80,41 +80,26 @@ public:
         return '0';
 
     }
-
+    
     bool isValid(string s) {
-        if (s.empty())
-            return true;
-
-        stack<char> store;
-
-        for ( int i=0;i<s.size();i++ )
-        {
-            char c = s[i];
-
-            if (store.empty()) {
-                store.push(c);
+        if(s.empty()) return true;
+        
+        stack<char> stk;
+        for(char &ch : s){
+            if(stk.empty()) {
+                stk.push(ch);
                 continue;
             }
             
-
-            if (store.top() == pair(c)) {
-                store.pop();         
-            }else
-            {
-                store.push(c);
-
-                // 该操作直接加速
-                if (c==']' || c=='}' || c==')')
-                    return false;
-            }
-        }
-
-        if ( store.empty() ) {
-            return true;
-        }
-
-        return false;
+            if(stk.top() != pair(ch)){
+                if(pair(ch)!='0') return false; // 及时止损
                 
+                stk.push(ch);
+            }else{
+                stk.pop();
+            } 
+        }
+        
+        return stk.empty();
     }
 };
-
