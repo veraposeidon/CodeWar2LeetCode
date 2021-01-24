@@ -6,7 +6,7 @@
 
 // @lc code=start
 class Solution {
-public:
+public:3
     int findDuplicate(vector<int>& nums) {
         // 环形链表找入口, 快慢指针
         int slow = nums[0];
